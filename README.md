@@ -64,13 +64,13 @@ docker logs site
 
 Caso tenha ocorrido tudo bem, entre no endereço [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
-## Como rodar localmente (sem Docker)
+## Como rodar localmente em modo desenvolvimento (sem Docker)
 
 Para conseguir rodar o servidor de desenvolvimento, sem utilização de Docker, é necessário ter o [Node.js](https://nodejs.org/pt-br/) instalado na sua máquina; ele é um runtime de JavaScript, necessário para executar nosso script.
 
 Ao clonar o repositório você deve rodar o seguinte comando para fazer o download das dependências necessárias:
 ```
-npm i --legacy-peer-deps
+npm i
 ```
 
 Crie uma cópia do arquivo `.env.sample` e renomeie para `.env` e configure as variáveis devidamente, caso necessário.
@@ -79,6 +79,31 @@ Rodando o servidor de desenvolvimento:
 
 ```bash
 npm run dev
+```
+
+Entre no endereço [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
+
+## Como rodar localmente para testes (fazendo o build da aplicação)
+
+Para conseguir para fazer o build do projeto também é necessário ter o [Node.js](https://nodejs.org/pt-br/) instalado na sua máquina;
+
+Ao clonar o repositório você deve rodar o seguinte comando para fazer o download das dependências necessárias:
+```
+npm i
+```
+
+Crie uma cópia do arquivo `.env.sample` e renomeie para `.env` e configure as variáveis devidamente, caso necessário.
+
+Buildando o projeto:
+
+```bash
+npm run build
+```
+
+Rodando o projeto a partir do build criado
+
+```bash
+npm run start
 ```
 
 Entre no endereço [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
