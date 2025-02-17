@@ -51,13 +51,11 @@ type TransparencySectionProps = {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   transparencyData: any[];
   formatedEndDate: string;
-  createdAt: Date;
 };
 
 export default function TransparencySection({
   transparencyData,
   formatedEndDate,
-  createdAt,
 }: TransparencySectionProps) {
   const [value, setValue] = useState(0);
 
@@ -96,16 +94,7 @@ export default function TransparencySection({
               </p>
               <p>
                 Este gráfico representa dados de <b>janeiro de 2018</b> até{' '}
-                <b>{formatedEndDate.toLowerCase()}</b> e foi gerado em{' '}
-                <b>
-                  {createdAt.toLocaleDateString('pt-BR', {
-                    calendar: 'gregory',
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                    timeZone: 'UTC',
-                  })}
-                </b>
+                <b>{formatedEndDate.toLowerCase()}</b>.
               </p>
             </Grid>
           </Grid>

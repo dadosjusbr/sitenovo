@@ -12,7 +12,6 @@ import api from '../services/api';
 import MONTHS from '../@types/MONTHS';
 import light from '../styles/theme-light';
 import { getCurrentYear } from '../functions/currentYear';
-import COLLECT_INFOS from '../@types/COLLECT_INFOS';
 import ShareModal from '../components/Common/ShareModal';
 import DownloadDumpDialog from '../components/Common/DownloadDumpDialog';
 import { useDownloadDump } from '../hooks/useDownloadDump';
@@ -49,7 +48,6 @@ export default function Index({
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [createdAt, setCreatedAt] = useState<Date>(new Date());
   const [fileLink, dumpDate] = useDownloadDump();
   const nextDateIsNavigable = useMemo<boolean>(
     () => year !== new Date().getFullYear(),
@@ -58,15 +56,6 @@ export default function Index({
   const previousDateIsNavigable = useMemo<boolean>(() => year !== 2018, [year]);
   useEffect(() => {
     fetchGeneralChartData();
-    const date = new Date(
-      getCurrentYear(),
-      new Date().getDate() <= COLLECT_INFOS.COLLECT_DATE
-        ? new Date().getMonth() - 1
-        : new Date().getMonth(),
-      17,
-    );
-
-    setCreatedAt(date);
   }, [year]);
 
   async function fetchGeneralChartData() {
@@ -128,7 +117,6 @@ export default function Index({
         <Paper elevation={0} square>
           <Container>
             <IndexPage.TransparencySection
-              createdAt={createdAt}
               formatedEndDate={formatedEndDate}
               transparencyData={transparencyData}
             />
