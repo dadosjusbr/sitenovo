@@ -66,7 +66,12 @@ const ErrorTable: React.FC<{
           </Stack>
           <Paper elevation={0}>
             <Box textAlign="center">
-              <Image src="/img/undraw_cancel.svg" width={200} height={200} />
+              <Image
+                src="/img/undraw_cancel.svg"
+                alt="cancelar"
+                width={200}
+                height={200}
+              />
               <Typography variant="body1" py={2}>
                 O <strong>{agency?.id_orgao.toUpperCase()}</strong> não
                 disponibilizou os dados de{' '}

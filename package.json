@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_OPTIONS='-r @newrelic/next' next start -p $PORT"
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",

@@ -69,7 +69,12 @@ const RemunerationBarGraph: React.FC<RemunerationBarGraphProps> = ({
               />
             ) : (
               <Box display="flex" alignItems="center" justifyContent="center">
-                <Image src="/img/undraw_cancel.svg" width={200} height={200} />
+                <Image
+                  src="/img/undraw_cancel.svg"
+                  alt="cancelar"
+                  width={200}
+                  height={200}
+                />
               </Box>
             )}
             <Box px={2}>

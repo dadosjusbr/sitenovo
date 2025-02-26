@@ -53,20 +53,25 @@ const IndexTabGraph = dynamic(
   },
 );
 
+type chartDataType = {
+  dados_anuais?: AnnualSummaryData[];
+  orgao: Agency;
+};
+
 export interface AgencyPageWithoutNavigationProps {
   id: string;
   year: number;
-  agency: Agency;
   title: string;
-  data: AnnualSummaryData[];
 }
 
 const AgencyPageWithoutNavigation: React.FC<
   AgencyPageWithoutNavigationProps
-> = ({ id, title, year, agency, data }) => {
+> = ({ id, title, year }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [plotData, setPlotData] = useState<AggregateIndexes[]>([]);
   const [agencyInfo, setAgencyInfo] = useState<v2AgencyTotalsYear>();
+  const [agency, setAgency] = useState<Agency>();
+  const [data, setData] = useState<AnnualSummaryData[]>([]);
   const [loading, setLoading] = useState(true);
   const fileLink = `${process.env.S3_REPO_URL}/${id}/datapackage/${id}.zip`;
   const matches = useMediaQuery('(max-width:900px)');
@@ -91,10 +96,13 @@ const AgencyPageWithoutNavigation: React.FC<
 
   const fetchAgencyInfo = async () => {
     try {
-      const { data: response } = await api.ui.get(
-        `/v2/orgao/totais/${agency.id_orgao}/${year}`,
-      );
+      const [{ data: resumo }, { data: response }] = await Promise.all([
+        api.ui.get<chartDataType>(`/v2/orgao/resumo/${id}`),
+        api.ui.get<v2AgencyTotalsYear>(`/v2/orgao/totais/${id}/${year}`),
+      ]);
 
+      setAgency(resumo.orgao);
+      setData(resumo.dados_anuais);
       setAgencyInfo(response);
     } catch (err) {
       throw new Error(

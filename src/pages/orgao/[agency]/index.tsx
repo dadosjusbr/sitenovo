@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
@@ -15,28 +14,11 @@ const AgencyWithoutNavigation = dynamic(
 
 export default function AnualAgencyPage({
   id,
-  agency,
-  data,
   fullName,
 }: {
   id: string;
-  agency: Agency;
-  data: AnnualSummaryData[];
   fullName: string;
 }) {
-  const [year, setYear] = useState(getCurrentYear());
-
-  useEffect(() => {
-    const yearData: number =
-      data &&
-      data
-        .map(d => d.ano)
-        .sort((a, b) => b - a)
-        .find(d => d <= getCurrentYear());
-
-    setYear(yearData);
-  }, [data]);
-
   return (
     <Box>
       <Head>
@@ -54,10 +36,8 @@ export default function AnualAgencyPage({
       <Header />
       <Box display="flex" my={10} justifyContent="center">
         <AgencyWithoutNavigation
-          data={data}
           id={id}
-          year={year}
-          agency={agency}
+          year={getCurrentYear()}
           title={fullName}
         />
       </Box>
@@ -85,7 +65,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return {
       props: {
         id,
-        data: agency.dados_anuais ? agency.dados_anuais : null,
         agency: agency?.orgao,
         fullName: agency?.orgao.nome,
         plotData,
